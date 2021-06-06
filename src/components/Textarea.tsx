@@ -21,16 +21,24 @@ const Textarea = () => {
         }
     }, [content, maxNumOfCharacters]);
 
+    const color = content.length > maxNumOfCharacters ? 'text-red-600' : 'text-gray-400';
+
     return (
-        <>
-            <textarea
-                value={ content }
-                onChange={ handleValueChange }
-            />
-            <span>{ availablePercentageOfCharacters }%</span>
-            <span>{ availableNumOfCharacters }</span>
-            <button>Submit</button>
-        </>
+        <div className='flex items-center justify-center min-h-screen bg-indigo-300' >
+            <div className='rounded bg-white p-4 w-1/4'>
+                <textarea
+                    value={ content }
+                    onChange={ handleValueChange }
+                    className='w-full outline-none border border-indigo-300 rounded h-36 resize-none p-4 text-gray-400'
+                />
+                
+                <div className='flex justify-end items-center mt-4'>
+                    <span className={ `${ color } text-xs` }>{ availableNumOfCharacters }</span>
+                    <span>{ availablePercentageOfCharacters }%</span>
+                    <button className='bg-indigo-500 text-white px-4 py-2 rounded ml-4'>Submit</button>
+                </div>
+            </div>
+        </div>
 
     );
 };
