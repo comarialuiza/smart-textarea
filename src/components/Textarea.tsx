@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Textarea = () => {
     const [content, setContent] = useState('');
@@ -23,6 +25,8 @@ const Textarea = () => {
 
     const color = content.length > maxNumOfCharacters ? 'text-red-600' : 'text-gray-400';
 
+    const trailColor = content.length > maxNumOfCharacters ? 'red' : 'rgb(165, 180, 252)' ;
+
     return (
         <div className='flex items-center justify-center min-h-screen bg-indigo-300' >
             <div className='rounded bg-white p-4 w-1/4'>
@@ -34,7 +38,16 @@ const Textarea = () => {
                 
                 <div className='flex justify-end items-center mt-4'>
                     <span className={ `${ color } text-xs` }>{ availableNumOfCharacters }</span>
-                    <span>{ availablePercentageOfCharacters }%</span>
+
+                    <div className='h-8 w-8 ml-4'>
+                        <CircularProgressbar
+                            value={ availablePercentageOfCharacters }
+                            styles={ buildStyles({
+                                pathColor: trailColor
+                            }) }
+                        />
+                    </div>
+
                     <button className='bg-indigo-500 text-white px-4 py-2 rounded ml-4'>Submit</button>
                 </div>
             </div>
